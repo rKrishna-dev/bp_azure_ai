@@ -2,6 +2,8 @@ import {
   AzureKeyCredential,
   TextAnalysisClient,
 } from "@azure/ai-language-text";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 import cors from "cors";
 import { DocumentAnalysisClient } from "@azure/ai-form-recognizer";
@@ -14,15 +16,12 @@ app.use(cors());
 const port = 3000;
 
 // Summarize API
-const endpoint =
-  process.env["ENDPOINT"] ||
-  "https://ntu-hackathon.cognitiveservices.azure.com/";
-const apiKey =
-  process.env["LANGUAGE_API_KEY"] || "ce91393f4d6e4710a26b710142e60ec6";
+const endpoint = process.env["ENDPOINT"];
+const apiKey = process.env["LANGUAGE_API_KEY"];
 
 // PDF to text API
-const PDFkey = "da713630eb414baba83ef591cd5ab441";
-const PDFendpoint = "https://ntu-form-recognizer.cognitiveservices.azure.com/";
+const PDFkey = process.env["PDF_KEY"];
+const PDFendpoint = process.env["PDF_ENDPOINT"];
 
 // helper functions
 function* getTextOfSpans(content, spans) {
